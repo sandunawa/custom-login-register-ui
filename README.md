@@ -1,20 +1,20 @@
-# Modern Authentication UI (Login & Register)
+# Moatix Check – Modern Authentication UI (Login & Register)
 
-A modern, accessible, and responsive Login and Registration interface with client-side validation and a mock authentication layer built with **Next.js 16**, **React 19**, and **TypeScript**.
+A modern, accessible, and responsive Login and Registration interface with client-side validation and a mock authentication layer built with **Next.js 16**, **React 19**, and **TypeScript**, styled to match the official **Moatix Check Assessment Portal** theme.
 
 ---
 
 ## 📸 Interface Preview
 
 ### 1. Sign In Page (`/login`)
-Split-screen desktop layout featuring a dark brand stage with ambient accents alongside a clean, accessible white form sheet:
+Sky-blue assessment portal theme with official top navigation bar, floating digital safety badge, and clean card form:
 
 ![Sign In Page](docs/images/login-page.jpg)
 
 ---
 
 ### 2. Registration Page (`/register`)
-Two-section structured form with live password strength engine, Sri Lankan phone formatting, and real-time field validation:
+Structured sign-up interface featuring live validation, Sri Lankan phone formatting, and password strength evaluation:
 
 ![Registration Page](docs/images/register-page.jpg)
 
@@ -22,12 +22,12 @@ Two-section structured form with live password strength engine, Sri Lankan phone
 
 ## ✨ Features
 
-- **Split Screen Layout:** 45% dark stage with perspective grid & ambient lighting; 55% soft paper form side.
+- **Official Moatix Portal Theme:** Soft sky blue background gradient with royal blue accent buttons and navy text.
+- **Top Brand Navigation Bar:** Includes the Moatix shield mark, BY ZEGBIT badge, and quick access navigation links.
 - **Client-Side Validation:**
   - Standard email format validation (RFC 5322).
   - Sri Lankan phone number normalisation (`+94` / `07x`).
   - Full name checks supporting Unicode characters (Latin, Sinhala, Tamil).
-  - Live 4-tier password strength meter (Weak / Fair / Good / Strong).
   - Real-time password confirmation match indicator.
 - **Interactive Password UX:**
   - Show / Hide toggle with accessible `aria-pressed` states.
@@ -39,7 +39,7 @@ Two-section structured form with live password strength engine, Sri Lankan phone
   - Rate limiting with 30-second cooldown after 5 failed attempts.
   - Zero sensitive data stored in local storage, cookies, or browser logs.
 - **Responsive & Accessible (WCAG AA):**
-  - Mobile collapsing header band, full touch targets (44px+), visible focus rings, and `prefers-reduced-motion` compliance.
+  - Full touch targets (44px+), visible focus rings, and `prefers-reduced-motion` compliance.
 
 ---
 
