@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Mail, Check, AlertCircle, ArrowRight } from 'lucide-react';
+import { Mail, Check, AlertCircle, ArrowRight, UserCheck } from 'lucide-react';
 import { ZbField } from '../check/zb/ZbField';
 import { ZbButton } from '../check/zb/ZbButton';
 import { PasswordField } from './PasswordField';
@@ -109,82 +109,89 @@ export const LoginForm: React.FC = () => {
 
   if (isSuccess) {
     return (
-      <div className="zb-form-sheet zb-pop-in" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ width: '4rem', height: '4rem', borderRadius: '50%', backgroundColor: 'var(--zb-lime)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--zb-black)', marginBottom: '1.25rem' }}>
-          <Check style={{ width: '2rem', height: '2rem', strokeWidth: 3 }} />
+      <div className="mx-card">
+        <div className="mx-card-header">
+          <div style={{ width: '36px', height: '36px', borderRadius: '8px', backgroundColor: '#dbeafe', color: '#1d4ed8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Check style={{ width: '20px', height: '20px', strokeWidth: 3 }} />
+          </div>
+          <div>
+            <h2 style={{ fontSize: '1.125rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>Signed in (Demo)</h2>
+            <p style={{ margin: 0, fontSize: '0.75rem', color: '#64748b' }}>Authentication simulation successful</p>
+          </div>
         </div>
-        <h2 style={{ fontSize: '1.5rem', fontFamily: 'var(--font-heading)', fontWeight: 700, margin: '0 0 0.5rem 0', color: 'var(--zb-black)' }}>Signed in (demo)</h2>
-        <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--zb-muted)', maxWidth: '24rem' }}>
-          No credentials or sessions were stored. This interface is running against Moatix’s mock auth client.
-        </p>
 
-        <div style={{ marginTop: '2rem', width: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <Link href="/check" style={{ textDecoration: 'none' }}>
-            <ZbButton variant="primary" fullWidth>
-              Go to checker
-              <ArrowRight style={{ width: '1rem', height: '1rem', marginLeft: '0.25rem' }} />
-            </ZbButton>
-          </Link>
-          <button
-            type="button"
-            onClick={() => {
-              setIsSuccess(false);
-              setIdentifier('');
-            }}
-            style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--zb-muted)', background: 'none', border: 'none', textDecoration: 'underline', cursor: 'pointer', marginTop: '0.5rem' }}
-          >
-            Sign in with another account
-          </button>
+        <div className="mx-card-body" style={{ textAlign: 'center' }}>
+          <p style={{ margin: '0 0 1.5rem 0', fontSize: '0.9375rem', color: '#334155' }}>
+            No credentials or sessions were stored. You are authenticated against Moatix’s client-side mock provider.
+          </p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <Link href="/check" style={{ textDecoration: 'none' }}>
+              <ZbButton variant="primary" fullWidth>
+                Start Checking Links (Demo) →
+              </ZbButton>
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                setIsSuccess(false);
+                setIdentifier('');
+              }}
+              style={{ fontSize: '0.8125rem', color: '#64748b', background: 'none', border: 'none', textDecoration: 'underline', cursor: 'pointer' }}
+            >
+              Sign in with another account
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={`zb-form-sheet ${shake ? 'zb-shake' : ''}`}>
-      {isLoading && <div className="zb-scan-line" />}
-
-      {/* Header */}
-      <div style={{ marginBottom: '1.5rem' }}>
-        <span style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--zb-muted)', display: 'block', marginBottom: '0.25rem' }}>
-          SIGN IN
-        </span>
-        <h1 style={{ fontSize: '1.75rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: 'var(--zb-black)', margin: 0, letterSpacing: '-0.02em' }}>
-          Sign in to Moatix
-        </h1>
-        <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.875rem', color: 'var(--zb-muted)' }}>
-          Enter your credentials to access your verified reports.
-        </p>
+    <div className={`mx-card ${shake ? 'zb-shake' : ''}`}>
+      {/* Top Header echoing the Web Link Checker banner from screenshot */}
+      <div className="mx-card-header">
+        <div style={{ width: '36px', height: '36px', borderRadius: '8px', backgroundColor: '#dbeafe', color: '#1d4ed8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <UserCheck style={{ width: '20px', height: '20px' }} />
+        </div>
+        <div>
+          <h2 style={{ fontSize: '1.0625rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+            Sign In to Moatix
+          </h2>
+          <p style={{ margin: 0, fontSize: '0.75rem', color: '#64748b' }}>
+            Access saved scam evaluations & verified history
+          </p>
+        </div>
       </div>
 
-      {generalError && (
-        <div role="alert" style={{ marginBottom: '1.25rem', padding: '0.75rem', borderRadius: '8px', backgroundColor: 'rgba(198, 40, 40, 0.1)', border: '1px solid rgba(198, 40, 40, 0.25)', display: 'flex', alignItems: 'center', gap: '0.625rem', fontSize: '0.75rem', color: 'var(--zb-error-light)', fontWeight: 500 }}>
-          <AlertCircle style={{ width: '1rem', height: '1rem', flexShrink: 0 }} />
-          <span>{generalError}</span>
-        </div>
-      )}
+      <div className="mx-card-body">
+        {generalError && (
+          <div role="alert" style={{ marginBottom: '1.25rem', padding: '0.75rem 1rem', borderRadius: '8px', backgroundColor: '#fef2f2', border: '1px solid #fecaca', display: 'flex', alignItems: 'center', gap: '0.625rem', fontSize: '0.8125rem', color: '#dc2626', fontWeight: 500 }}>
+            <AlertCircle style={{ width: '1rem', height: '1rem', flexShrink: 0 }} />
+            <span>{generalError}</span>
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit} noValidate>
-        <ZbField
-          ref={identifierRef}
-          label="Email or phone number"
-          placeholder="name@example.lk or 07x..."
-          value={identifier}
-          onChange={(e) => {
-            setIdentifier(e.target.value);
-            if (identifierError) setIdentifierError(null);
-          }}
-          error={identifierError || undefined}
-          autoComplete="username"
-          inputMode="email"
-          icon={<Mail style={{ width: '1rem', height: '1rem' }} />}
-          disabled={isLoading || cooldown > 0}
-        />
+        <form onSubmit={handleSubmit} noValidate>
+          <ZbField
+            ref={identifierRef}
+            label="Email or Phone Number:"
+            placeholder="e.g. name@example.lk or 077..."
+            value={identifier}
+            onChange={(e) => {
+              setIdentifier(e.target.value);
+              if (identifierError) setIdentifierError(null);
+            }}
+            error={identifierError || undefined}
+            autoComplete="username"
+            inputMode="email"
+            icon={<Mail style={{ width: '1.125rem', height: '1.125rem' }} />}
+            disabled={isLoading || cooldown > 0}
+          />
 
-        <div style={{ marginBottom: '1rem' }}>
           <PasswordField
             ref={passwordRef}
-            label="Password"
+            label="Password:"
             placeholder="••••••••"
             value={password}
             onChange={(e) => {
@@ -195,62 +202,75 @@ export const LoginForm: React.FC = () => {
             autoComplete="current-password"
             disabled={isLoading || cooldown > 0}
           />
-        </div>
 
-        {/* Remember me & Forgot Password */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.8125rem', padding: '0.25rem 0 1.25rem 0' }}>
-          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', userSelect: 'none' }}>
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-              style={{ width: '1rem', height: '1rem', accentColor: 'var(--zb-black)' }}
-            />
-            <span style={{ color: 'var(--zb-muted)', fontWeight: 500 }}>Remember me</span>
-          </label>
+          {/* Remember me & Forgot Password */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.8125rem', padding: '0 0 1.25rem 0' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', userSelect: 'none' }}>
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                style={{ width: '1rem', height: '1rem', accentColor: '#1d4ed8' }}
+              />
+              <span style={{ color: '#475569', fontWeight: 500 }}>Remember me</span>
+            </label>
 
-          <Link
-            href="/forgot-password"
-            style={{ fontSize: '0.8125rem', color: 'var(--zb-muted)', textDecoration: 'none', fontWeight: 500 }}
-          >
-            Forgot password?
+            <Link
+              href="/forgot-password"
+              style={{ fontSize: '0.8125rem', color: '#1d4ed8', textDecoration: 'none', fontWeight: 600 }}
+            >
+              Forgot password?
+            </Link>
+          </div>
+
+          {/* Action Row */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '1rem', marginTop: '0.5rem' }}>
+            <button
+              type="button"
+              onClick={() => {
+                setIdentifier('');
+                setPassword('');
+              }}
+              style={{ background: 'none', border: 'none', color: '#475569', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer' }}
+            >
+              Clear
+            </button>
+
+            <ZbButton
+              type="submit"
+              variant="primary"
+              fullWidth={false}
+              isLoading={isLoading}
+              disabled={cooldown > 0}
+              style={{ minWidth: '150px' }}
+            >
+              {cooldown > 0 ? (
+                <span>Wait {cooldown}s</span>
+              ) : (
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.375rem' }}>
+                  Sign In (Demo) →
+                </span>
+              )}
+            </ZbButton>
+          </div>
+        </form>
+
+        <AuthDivider label="OR" />
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', textAlign: 'center' }}>
+          <Link href="/check" style={{ textDecoration: 'none' }}>
+            <ZbButton variant="outline" fullWidth>
+              Continue as Guest (No Account Needed)
+            </ZbButton>
           </Link>
+
+          <p style={{ margin: '0.75rem 0 0 0', fontSize: '0.875rem', color: '#64748b' }}>
+            New to Moatix?{' '}
+            <Link href="/register" style={{ color: '#1d4ed8', fontWeight: 700, textDecoration: 'none' }}>
+              Create an account
+            </Link>
+          </p>
         </div>
-
-        {/* Primary CTA */}
-        <div>
-          <ZbButton
-            type="submit"
-            variant="primary"
-            fullWidth
-            isLoading={isLoading}
-            disabled={cooldown > 0}
-          >
-            {cooldown > 0 ? (
-              <span style={{ fontFamily: 'var(--font-mono)' }}>Try again in {cooldown}s</span>
-            ) : (
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                Sign in
-                <ArrowRight style={{ width: '1rem', height: '1rem' }} />
-              </span>
-            )}
-          </ZbButton>
-        </div>
-      </form>
-
-      <AuthDivider />
-
-      <Link href="/check" style={{ textDecoration: 'none' }}>
-        <ZbButton variant="outline" fullWidth>
-          Continue as guest
-        </ZbButton>
-      </Link>
-
-      <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.8125rem', color: 'var(--zb-muted)' }}>
-        New to Moatix?{' '}
-        <Link href="/register" style={{ color: 'var(--zb-black)', fontWeight: 700, textDecoration: 'underline' }}>
-          Create an account
-        </Link>
       </div>
     </div>
   );

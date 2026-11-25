@@ -12,68 +12,63 @@ interface PasswordStrengthProps {
 export const PasswordStrength: React.FC<PasswordStrengthProps> = ({ strength, showRules = true }) => {
   const { score, level, label, rules } = strength;
 
-  // Segment colors based on strength level
-  // 1: Red (Weak), 2: Amber (Fair), 3: Black (Good), 4: Black with Lime tip (Strong)
   const getSegmentColor = (index: number) => {
-    if (index >= score) return 'bg-[#E3E3DF]';
-    if (level === 'weak') return 'bg-[#E5484D]';
-    if (level === 'fair') return 'bg-[#F5A524]';
-    if (level === 'good') return 'bg-[#0B0B0B]';
-    if (level === 'strong') {
-      return index === 3 ? 'bg-[#B8F52A]' : 'bg-[#0B0B0B]';
-    }
-    return 'bg-[#E3E3DF]';
+    if (index >= score) return '#e2e8f0';
+    if (level === 'weak') return '#ef4444';
+    if (level === 'fair') return '#f59e0b';
+    if (level === 'good') return '#3b82f6';
+    if (level === 'strong') return '#1d4ed8';
+    return '#e2e8f0';
   };
 
   return (
-    <div className="flex flex-col gap-2 mt-1">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem', marginTop: '0.25rem', marginBottom: '0.75rem' }}>
       {/* 4 Segment Progress Rail */}
-      <div className="flex items-center gap-1.5 w-full h-1.5">
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', width: '100%', height: '4px' }}>
         {[0, 1, 2, 3].map((idx) => (
           <div
             key={idx}
-            className={`h-full flex-1 rounded-full transition-all duration-200 ${getSegmentColor(idx)}`}
+            style={{
+              height: '100%',
+              flex: 1,
+              borderRadius: '9999px',
+              backgroundColor: getSegmentColor(idx),
+              transition: 'all 200ms ease'
+            }}
           />
         ))}
       </div>
 
-      {/* Label & Accessibility Live Region */}
-      <div className="flex items-center justify-between text-xs font-mono">
-        <span className="text-[#6B6B66]">Strength</span>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.75rem' }}>
+        <span style={{ color: '#64748b' }}>Password strength</span>
         <span 
           role="status" 
           aria-live="polite" 
-          className={`font-semibold ${
-            level === 'weak' ? 'text-[#C62828]' :
-            level === 'fair' ? 'text-[#B26A00]' :
-            'text-[#0B0B0B]'
-          }`}
+          style={{
+            fontWeight: 700,
+            color: level === 'weak' ? '#dc2626' : level === 'fair' ? '#d97706' : '#1d4ed8'
+          }}
         >
           {score > 0 ? label : 'None'}
         </span>
       </div>
 
-      {/* Live Rules Checklist with Check / Circle Icons */}
       {showRules && (
-        <ul className="grid grid-cols-1 gap-1 mt-1 text-xs text-[#6B6B66]">
+        <ul style={{ margin: '0.25rem 0 0 0', padding: 0, listStyle: 'none', display: 'grid', gridTemplateColumns: '1fr', gap: '0.25rem', fontSize: '0.75rem' }}>
           {rules.map((rule) => (
-            <li key={rule.id} className="flex items-center gap-1.5">
+            <li key={rule.id} style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
               {rule.met ? (
-                <Check className="w-3.5 h-3.5 text-[#0B0B0B] stroke-[2.5]" aria-hidden="true" />
+                <Check style={{ width: '0.875rem', height: '0.875rem', color: '#16a34a', strokeWidth: 2.5 }} />
               ) : (
-                <Circle className="w-3.5 h-3.5 text-[#E3E3DF] stroke-[2]" aria-hidden="true" />
+                <Circle style={{ width: '0.875rem', height: '0.875rem', color: '#cbd5e1' }} />
               )}
-              <span className={rule.met ? 'text-[#0B0B0B] font-medium' : 'text-[#6B6B66]'}>
+              <span style={{ color: rule.met ? '#0f172a' : '#64748b', fontWeight: rule.met ? 600 : 400 }}>
                 {rule.label}
               </span>
             </li>
           ))}
         </ul>
       )}
-
-      <p className="text-[11px] text-[#6B6B66] italic mt-0.5">
-        Strength is a hint, not a guarantee.
-      </p>
     </div>
   );
 };

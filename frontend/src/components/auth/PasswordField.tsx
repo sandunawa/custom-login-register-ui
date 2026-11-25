@@ -22,7 +22,7 @@ export const PasswordField = React.forwardRef<HTMLInputElement, PasswordFieldPro
     };
 
     return (
-      <div className="relative w-full">
+      <div style={{ position: 'relative', width: '100%' }}>
         <ZbField
           ref={ref}
           type={showPassword ? 'text' : 'password'}
@@ -38,12 +38,22 @@ export const PasswordField = React.forwardRef<HTMLInputElement, PasswordFieldPro
             onKeyUp?.(e);
           }}
           rightElement={
-            <div className="flex items-center gap-1.5">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
               {capsLockActive && (
                 <span 
                   role="status" 
                   aria-live="polite"
-                  className="px-1.5 py-0.5 text-[10px] font-mono font-bold uppercase rounded bg-[#F5A524]/20 text-[#B26A00] border border-[#F5A524]/40"
+                  style={{
+                    padding: '2px 6px',
+                    fontSize: '0.625rem',
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    borderRadius: '4px',
+                    backgroundColor: '#fef3c7',
+                    color: '#b45309',
+                    border: '1px solid #fde68a'
+                  }}
                   title="Caps Lock is active"
                 >
                   CAPS
@@ -54,9 +64,17 @@ export const PasswordField = React.forwardRef<HTMLInputElement, PasswordFieldPro
                 onClick={() => setShowPassword(!showPassword)}
                 aria-pressed={showPassword}
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
-                className="p-1.5 text-[#6B6B66] hover:text-[#0B0B0B] transition-colors rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-black cursor-pointer"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#64748b',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '4px'
+                }}
               >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {showPassword ? <EyeOff style={{ width: '1rem', height: '1rem' }} /> : <Eye style={{ width: '1rem', height: '1rem' }} />}
               </button>
             </div>
           }

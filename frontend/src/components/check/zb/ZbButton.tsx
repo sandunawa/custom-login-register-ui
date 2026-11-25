@@ -18,7 +18,7 @@ export const ZbButton: React.FC<ZbButtonProps> = ({
   style,
   ...props
 }) => {
-  const btnClass = variant === 'primary' ? 'zb-btn-primary' : variant === 'outline' ? 'zb-btn-outline' : '';
+  const btnClass = variant === 'primary' ? 'mx-btn-primary' : 'mx-btn-outline';
 
   return (
     <button

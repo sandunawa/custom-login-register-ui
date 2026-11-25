@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
-import { Mail, User, Phone, Check, AlertCircle, ArrowRight } from 'lucide-react';
+import { Mail, User, Phone, Check, ArrowRight, UserPlus } from 'lucide-react';
 import { ZbField } from '../check/zb/ZbField';
 import { ZbButton } from '../check/zb/ZbButton';
 import { PasswordField } from './PasswordField';
@@ -12,7 +12,6 @@ import { isValidEmail, validateFullName, evaluatePasswordStrength } from '@/lib/
 import { isValidSriLankanPhone } from '@/lib/phone';
 
 export const RegisterForm: React.FC = () => {
-  // Form fields
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -21,7 +20,6 @@ export const RegisterForm: React.FC = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [marketingOptIn, setMarketingOptIn] = useState(false);
 
-  // Field errors
   const [fullNameError, setFullNameError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState<string | null>(null);
@@ -33,7 +31,6 @@ export const RegisterForm: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [shake, setShake] = useState(false);
 
-  // Refs for focusing first invalid field
   const fullNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -53,7 +50,6 @@ export const RegisterForm: React.FC = () => {
     let valid = true;
     let firstFocusTarget: React.RefObject<HTMLInputElement | null> | null = null;
 
-    // 01 Details
     const nameRes = validateFullName(fullName);
     if (!nameRes.isValid) {
       setFullNameError(nameRes.error || 'Name is invalid');
@@ -79,7 +75,6 @@ export const RegisterForm: React.FC = () => {
       setPhoneError(null);
     }
 
-    // 02 Security
     if (!password || password.length < 8) {
       setPasswordError('Password must be at least 8 characters.');
       valid = false;
@@ -149,114 +144,120 @@ export const RegisterForm: React.FC = () => {
 
   if (isSuccess) {
     return (
-      <div className="zb-form-sheet p-8 sm:p-10 flex flex-col items-center text-center zb-pop-in">
-        <div className="w-16 h-16 rounded-full bg-[#B8F52A] flex items-center justify-center text-[#0B0B0B] mb-5 shadow-sm">
-          <Check className="w-8 h-8 stroke-[3]" />
+      <div className="mx-card">
+        <div className="mx-card-header">
+          <div style={{ width: '36px', height: '36px', borderRadius: '8px', backgroundColor: '#dbeafe', color: '#1d4ed8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Check style={{ width: '20px', height: '20px', strokeWidth: 3 }} />
+          </div>
+          <div>
+            <h2 style={{ fontSize: '1.125rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>Account Created (Demo)</h2>
+            <p style={{ margin: 0, fontSize: '0.75rem', color: '#64748b' }}>Profile simulated successfully</p>
+          </div>
         </div>
-        <h2 className="text-2xl font-heading font-bold text-[#0B0B0B]">Account created (demo)</h2>
-        <p className="mt-2 text-sm text-[#6B6B66] max-w-sm">
-          No real account was stored in any database. This mock registration verified input rules and simulation flow.
-        </p>
 
-        <div className="mt-8 w-full flex flex-col gap-3">
-          <Link href="/login" className="w-full">
-            <ZbButton variant="primary" fullWidth>
-              Go to sign in
-              <ArrowRight className="w-4 h-4 ml-1" />
-            </ZbButton>
-          </Link>
-          <Link href="/check" className="w-full">
-            <ZbButton variant="outline" fullWidth>
-              Start checking scams
-            </ZbButton>
-          </Link>
+        <div className="mx-card-body" style={{ textAlign: 'center' }}>
+          <p style={{ margin: '0 0 1.5rem 0', fontSize: '0.9375rem', color: '#334155' }}>
+            Your simulated digital safety account is active. No real credentials or cookies were stored.
+          </p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <Link href="/login" style={{ textDecoration: 'none' }}>
+              <ZbButton variant="primary" fullWidth>
+                Go to Sign In →
+              </ZbButton>
+            </Link>
+            <Link href="/check" style={{ textDecoration: 'none' }}>
+              <ZbButton variant="outline" fullWidth>
+                Start Checking Scams
+              </ZbButton>
+            </Link>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={`zb-form-sheet p-6 sm:p-8 lg:p-10 ${shake ? 'zb-shake' : ''}`}>
-      {isLoading && <div className="zb-scan-line" />}
-
-      {/* Header */}
-      <div className="mb-6">
-        <span className="text-[11px] font-mono tracking-widest text-[#6B6B66] uppercase block mb-1">
-          CREATE ACCOUNT
-        </span>
-        <h1 className="text-2xl sm:text-[28px] font-heading font-bold text-[#0B0B0B] tracking-tight">
-          Create your Moatix account
-        </h1>
-        <p className="mt-1 text-xs sm:text-sm text-[#6B6B66]">
-          One unified account to verify messages, numbers and slips.
-        </p>
+    <div className={`mx-card ${shake ? 'zb-shake' : ''}`}>
+      <div className="mx-card-header">
+        <div style={{ width: '36px', height: '36px', borderRadius: '8px', backgroundColor: '#dbeafe', color: '#1d4ed8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <UserPlus style={{ width: '20px', height: '20px' }} />
+        </div>
+        <div>
+          <h2 style={{ fontSize: '1.0625rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+            Create Moatix Account
+          </h2>
+          <p style={{ margin: 0, fontSize: '0.75rem', color: '#64748b' }}>
+            Join the digital scam assessment portal for Sri Lanka
+          </p>
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="space-y-6">
-        {/* SECTION 01: YOUR DETAILS */}
-        <div className="relative pl-3 border-l-2 border-[#0B0B0B] space-y-3.5">
-          <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#0B0B0B]">
-            01 YOUR DETAILS
+      <div className="mx-card-body">
+        <form onSubmit={handleSubmit} noValidate>
+          {/* Section 01: Details */}
+          <div style={{ marginBottom: '1.5rem' }}>
+            <span style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#1d4ed8', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '0.75rem' }}>
+              01 • Personal Details
+            </span>
+
+            <ZbField
+              ref={fullNameRef}
+              label="Full Name:"
+              placeholder="e.g. Kasun Perera"
+              value={fullName}
+              onChange={(e) => {
+                setFullName(e.target.value);
+                if (fullNameError) setFullNameError(null);
+              }}
+              error={fullNameError || undefined}
+              autoComplete="name"
+              icon={<User style={{ width: '1.125rem', height: '1.125rem' }} />}
+              disabled={isLoading}
+            />
+
+            <ZbField
+              ref={emailRef}
+              label="Email Address:"
+              placeholder="e.g. kasun@example.lk"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (emailError) setEmailError(null);
+              }}
+              error={emailError || undefined}
+              autoComplete="email"
+              inputMode="email"
+              icon={<Mail style={{ width: '1.125rem', height: '1.125rem' }} />}
+              disabled={isLoading}
+            />
+
+            <ZbField
+              ref={phoneRef}
+              label="Phone Number (Optional):"
+              placeholder="e.g. 077 123 4567"
+              value={phone}
+              onChange={(e) => {
+                setPhone(e.target.value);
+                if (phoneError) setPhoneError(null);
+              }}
+              error={phoneError || undefined}
+              helperText="Optional. Used only for emergency security alerts."
+              autoComplete="tel"
+              icon={<Phone style={{ width: '1.125rem', height: '1.125rem' }} />}
+              disabled={isLoading}
+            />
           </div>
 
-          <ZbField
-            ref={fullNameRef}
-            label="Full Name"
-            placeholder="e.g. Kasun Perera"
-            value={fullName}
-            onChange={(e) => {
-              setFullName(e.target.value);
-              if (fullNameError) setFullNameError(null);
-            }}
-            error={fullNameError || undefined}
-            autoComplete="name"
-            icon={<User className="w-4 h-4" />}
-            disabled={isLoading}
-          />
+          {/* Section 02: Password */}
+          <div style={{ marginBottom: '1.5rem' }}>
+            <span style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#1d4ed8', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '0.75rem' }}>
+              02 • Security
+            </span>
 
-          <ZbField
-            ref={emailRef}
-            label="Email Address"
-            placeholder="kasun@example.lk"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              if (emailError) setEmailError(null);
-            }}
-            error={emailError || undefined}
-            autoComplete="email"
-            inputMode="email"
-            icon={<Mail className="w-4 h-4" />}
-            disabled={isLoading}
-          />
-
-          <ZbField
-            ref={phoneRef}
-            label="Phone Number (Optional)"
-            placeholder="077 123 4567"
-            value={phone}
-            onChange={(e) => {
-              setPhone(e.target.value);
-              if (phoneError) setPhoneError(null);
-            }}
-            error={phoneError || undefined}
-            helperText="Optional. Used only for account recovery."
-            autoComplete="tel"
-            icon={<Phone className="w-4 h-4" />}
-            disabled={isLoading}
-          />
-        </div>
-
-        {/* SECTION 02: SECURE YOUR ACCOUNT */}
-        <div className="relative pl-3 border-l-2 border-[#0B0B0B] space-y-3.5">
-          <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#0B0B0B]">
-            02 SECURE YOUR ACCOUNT
-          </div>
-
-          <div>
             <PasswordField
               ref={passwordRef}
-              label="Password"
+              label="Password:"
               placeholder="••••••••"
               value={password}
               onChange={(e) => {
@@ -268,90 +269,104 @@ export const RegisterForm: React.FC = () => {
               disabled={isLoading}
             />
             {password.length > 0 && <PasswordStrength strength={passwordStrength} />}
+
+            <div style={{ marginTop: '0.75rem' }}>
+              <PasswordField
+                ref={confirmRef}
+                label="Confirm Password:"
+                placeholder="••••••••"
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                  if (confirmError) setConfirmError(null);
+                }}
+                error={confirmError || undefined}
+                autoComplete="new-password"
+                disabled={isLoading}
+              />
+              {passwordsMatch && (
+                <p style={{ margin: '0.25rem 0 0', fontSize: '0.75rem', color: '#16a34a', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <Check style={{ width: '0.875rem', height: '0.875rem' }} />
+                  <span>Passwords match</span>
+                </p>
+              )}
+            </div>
           </div>
 
-          <div className="relative">
-            <PasswordField
-              ref={confirmRef}
-              label="Confirm Password"
-              placeholder="••••••••"
-              value={confirmPassword}
-              onChange={(e) => {
-                setConfirmPassword(e.target.value);
-                if (confirmError) setConfirmError(null);
-              }}
-              error={confirmError || undefined}
-              autoComplete="new-password"
-              disabled={isLoading}
-            />
-            {passwordsMatch && (
-              <p className="text-xs text-[#0B0B0B] flex items-center gap-1.5 font-medium mt-1 font-mono">
-                <Check className="w-3.5 h-3.5 text-[#B8F52A] bg-black rounded-full p-0.5" />
-                <span>Passwords match</span>
+          {/* Consent Checkboxes */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', marginBottom: '1.5rem', fontSize: '0.8125rem' }}>
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', cursor: 'pointer', userSelect: 'none' }}>
+              <input
+                ref={termsRef}
+                type="checkbox"
+                checked={acceptTerms}
+                onChange={(e) => {
+                  setAcceptTerms(e.target.checked);
+                  if (termsError) setTermsError(null);
+                }}
+                style={{ width: '1rem', height: '1rem', marginTop: '2px', accentColor: '#1d4ed8' }}
+              />
+              <span style={{ color: '#475569', lineHeight: 1.4 }}>
+                I agree to the{' '}
+                <Link href="/privacy" style={{ color: '#1d4ed8', fontWeight: 600, textDecoration: 'none' }}>
+                  Privacy Policy
+                </Link>{' '}
+                and Terms of Service.
+              </span>
+            </label>
+            {termsError && (
+              <p style={{ margin: 0, fontSize: '0.75rem', color: '#dc2626', fontWeight: 500, paddingLeft: '1.5rem' }}>
+                {termsError}
               </p>
             )}
+
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', cursor: 'pointer', userSelect: 'none' }}>
+              <input
+                type="checkbox"
+                checked={marketingOptIn}
+                onChange={(e) => setMarketingOptIn(e.target.checked)}
+                style={{ width: '1rem', height: '1rem', marginTop: '2px', accentColor: '#1d4ed8' }}
+              />
+              <span style={{ color: '#64748b', lineHeight: 1.4 }}>
+                Send me emergency scam alerts and phishing advisories (optional).
+              </span>
+            </label>
           </div>
-        </div>
 
-        {/* Consent Checkboxes */}
-        <div className="space-y-2 pt-1 text-xs">
-          <label className="flex items-start gap-2.5 cursor-pointer select-none">
-            <input
-              ref={termsRef}
-              type="checkbox"
-              checked={acceptTerms}
-              onChange={(e) => {
-                setAcceptTerms(e.target.checked);
-                if (termsError) setTermsError(null);
+          {/* Buttons */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '1rem' }}>
+            <button
+              type="button"
+              onClick={() => {
+                setFullName('');
+                setEmail('');
+                setPhone('');
+                setPassword('');
+                setConfirmPassword('');
               }}
-              className="w-4 h-4 mt-0.5 rounded border-[#E3E3DF] text-[#0B0B0B] focus:ring-[#B8F52A]/40 accent-[#0B0B0B]"
-            />
-            <span className="text-[#6B6B66] leading-tight">
-              I agree to the{' '}
-              <Link href="/privacy" className="text-[#0B0B0B] underline font-medium">
-                Privacy Policy
-              </Link>{' '}
-              and{' '}
-              <Link href="/help" className="text-[#0B0B0B] underline font-medium">
-                Terms of Service
-              </Link>
-            </span>
-          </label>
-          {termsError && (
-            <p role="alert" className="text-xs text-[#C62828] flex items-center gap-1 font-medium pl-6.5">
-              <AlertCircle className="w-3.5 h-3.5" />
-              <span>{termsError}</span>
-            </p>
-          )}
+              style={{ background: 'none', border: 'none', color: '#475569', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer' }}
+            >
+              Clear
+            </button>
 
-          <label className="flex items-start gap-2.5 cursor-pointer select-none">
-            <input
-              type="checkbox"
-              checked={marketingOptIn}
-              onChange={(e) => setMarketingOptIn(e.target.checked)}
-              className="w-4 h-4 mt-0.5 rounded border-[#E3E3DF] text-[#0B0B0B] focus:ring-[#B8F52A]/40 accent-[#0B0B0B]"
-            />
-            <span className="text-[#6B6B66] leading-tight">
-              Send me critical scam advisories and fraud trend alerts (optional).
-            </span>
-          </label>
+            <ZbButton
+              type="submit"
+              variant="primary"
+              fullWidth={false}
+              isLoading={isLoading}
+              style={{ minWidth: '180px' }}
+            >
+              Create Account (Demo) →
+            </ZbButton>
+          </div>
+        </form>
+
+        <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.875rem', color: '#64748b' }}>
+          Already have an account?{' '}
+          <Link href="/login" style={{ color: '#1d4ed8', fontWeight: 700, textDecoration: 'none' }}>
+            Sign in
+          </Link>
         </div>
-
-        {/* Primary CTA */}
-        <div className="pt-2">
-          <ZbButton type="submit" variant="primary" fullWidth isLoading={isLoading}>
-            Create account
-            <ArrowRight className="w-4 h-4 ml-1" />
-          </ZbButton>
-        </div>
-      </form>
-
-      {/* Switch Link */}
-      <div className="mt-6 text-center text-xs text-[#6B6B66]">
-        Already have an account?{' '}
-        <Link href="/login" className="text-[#0B0B0B] font-semibold hover:underline">
-          Sign in
-        </Link>
       </div>
     </div>
   );

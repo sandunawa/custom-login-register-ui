@@ -1,41 +1,46 @@
 /* ==========================================================================
-   Moatix by ZegBit - Pure Standalone Theme System
-   Guarantees 100% styling without depending on external build preprocessors
+   Moatix Check - Official Brand Theme
+   Extracted from Moatix Assessment Portal (Sky Blue & Royal Blue Theme)
    ========================================================================== */
 
 :root {
-  --zb-lime: #B8F52A;
-  --zb-lime-hover: #A6E01F;
-  --zb-lime-soft: #EEFBC4;
-  --zb-lime-ring: rgba(184, 245, 42, 0.45);
-  --zb-lime-glow: rgba(184, 245, 42, 0.15);
+  /* Primary Brand Blues */
+  --mx-bg: #9ec5fe;            /* Soft Sky Blue Background */
+  --mx-bg-light: #b8d5ff;      /* Sky Blue Accent / Gradient */
+  --mx-primary: #1d4ed8;       /* Royal Blue Primary Action (Buttons, Badges) */
+  --mx-primary-hover: #1e40af; /* Darker Royal Blue */
+  --mx-primary-soft: #eff6ff;  /* Ultra Light Blue Surface */
+  --mx-primary-ring: rgba(29, 78, 216, 0.25);
 
-  --zb-black: #0B0B0B;
-  --zb-ink-1: #111111;
-  --zb-ink-2: #1A1A1A;
-  --zb-ink-3: #262626;
+  /* Dark Blue & Text Colors */
+  --mx-text-dark: #0f172a;     /* Deep Slate / Black Heading */
+  --mx-text-blue: #1e3a8a;     /* Deep Navy Blue Accent Text */
+  --mx-text-muted: #334155;    /* Subtitle & Secondary Text */
+  --mx-text-light: #64748b;    /* Placeholder & Small labels */
 
-  --zb-white: #FFFFFF;
-  --zb-paper: #F4F4F2;
-  --zb-line: #E3E3DF;
-  --zb-muted: #6B6B66;
-  --zb-muted-dark: #8E8E88;
+  /* Surfaces & Lines */
+  --mx-white: #ffffff;
+  --mx-card-bg: #ffffff;
+  --mx-card-border: #cbd5e1;
+  --mx-line: #e2e8f0;
+  --mx-header-card: #f8fafc;
 
-  --zb-error-dark: #E5484D;
-  --zb-error-light: #C62828;
-  --zb-warning-dark: #F5A524;
-  --zb-warning-light: #B26A00;
-  --zb-success: #10B981;
+  /* Semantic Alerts */
+  --mx-error: #dc2626;
+  --mx-error-bg: #fef2f2;
+  --mx-success: #16a34a;
 
-  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Fonts */
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
 
-  --zb-radius-xs: 6px;
-  --zb-radius-sm: 8px;
-  --zb-radius-md: 12px;
-  --zb-radius-lg: 16px;
-  --zb-radius-xl: 24px;
+  /* Radii */
+  --mx-radius-sm: 8px;
+  --mx-radius-md: 12px;
+  --mx-radius-lg: 16px;
+  --mx-radius-xl: 20px;
+  --mx-radius-pill: 9999px;
 }
 
 *, *::before, *::after {
@@ -45,168 +50,145 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--zb-black);
-  color: var(--zb-white);
+  background-color: var(--mx-bg);
+  color: var(--mx-text-dark);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 
-/* Auth Layout & Split Screen */
-.zb-auth-split {
-  min-height: 100dvh;
+/* Background Atmosphere */
+.mx-page-wrapper {
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 20%, #c4dcfe 0%, #9ec5fe 85%);
   display: flex;
   flex-direction: column;
-  background-color: var(--zb-paper);
 }
 
-@media (min-width: 1024px) {
-  .zb-auth-split {
-    flex-direction: row;
-  }
-  .zb-auth-brand-col {
-    width: 45% !important;
-    min-height: 100dvh !important;
-    clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
-    position: relative;
-    z-index: 10;
-  }
-  .zb-auth-form-col {
-    width: 55% !important;
-    padding: 3rem !important;
-    margin-top: 0 !important;
-  }
-}
-
-.zb-auth-brand-col {
+/* Top Navbar (Same as MoatixCheck header) */
+.mx-navbar {
   width: 100%;
-  min-height: 280px;
-  background-color: var(--zb-black);
-  position: relative;
-  overflow: hidden;
-}
-
-.zb-auth-form-col {
-  width: 100%;
-  flex: 1;
+  height: 72px;
+  background: var(--mx-white);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  position: relative;
-  z-index: 20;
-  margin-top: -2rem;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
-/* Stage Background */
-.zb-stage {
-  background-color: var(--zb-black);
-  color: var(--zb-white);
-  position: relative;
-  overflow: hidden;
+/* Floating Badge (e.g. Moatix Check • Digital Safety for Sri Lanka) */
+.mx-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 1rem;
+  background: var(--mx-white);
+  color: var(--mx-text-muted);
+  border-radius: var(--mx-radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
-.zb-grid-pattern {
-  position: absolute;
-  inset: 0;
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  opacity: 0.4;
-}
-
-.zb-slant-beam {
-  position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 120%;
-  height: 140%;
-  background: radial-gradient(circle at 60% 40%, rgba(184, 245, 42, 0.1) 0%, transparent 60%);
-  transform: rotate(-18deg);
-  pointer-events: none;
-}
-
-/* White Form Sheet */
-.zb-form-sheet {
-  background: var(--zb-white);
-  border: 1px solid var(--zb-line);
-  border-radius: var(--zb-radius-xl);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 24px 48px -24px rgba(0, 0, 0, 0.18);
+/* Main Form Card */
+.mx-card {
+  background: var(--mx-white);
+  border-radius: var(--mx-radius-xl);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   width: 100%;
-  max-width: 460px;
-  padding: 2.25rem;
-  position: relative;
+  max-width: 500px;
   overflow: hidden;
-  color: var(--zb-black);
-  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 240ms ease;
+}
+
+/* Card Gradient Top Header */
+.mx-card-header {
+  background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--mx-line);
+  padding: 1.25rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mx-card-body {
+  padding: 2rem 2.25rem;
 }
 
 @media (max-width: 640px) {
-  .zb-form-sheet {
+  .mx-card-body {
     padding: 1.5rem;
   }
 }
 
 /* Inputs & Buttons */
-.zb-input-field {
+.mx-input {
   width: 100%;
-  height: 52px;
-  background: var(--zb-white);
-  color: var(--zb-black);
+  height: 48px;
+  background: var(--mx-white);
+  color: var(--mx-text-dark);
   font-size: 0.9375rem;
-  border-radius: var(--zb-radius-sm);
-  border: 1px solid var(--zb-line);
+  border-radius: var(--mx-radius-md);
+  border: 1px solid var(--mx-card-border);
   outline: none;
   padding: 0 1rem;
   font-family: inherit;
   transition: all 180ms ease;
 }
 
-.zb-input-field:focus {
-  border-color: var(--zb-black);
-  box-shadow: 0 0 0 4px var(--zb-lime-ring);
+.mx-input:focus {
+  border-color: var(--mx-primary);
+  box-shadow: 0 0 0 3px var(--mx-primary-ring);
 }
 
-.zb-input-field.has-error {
-  border-color: var(--zb-error-light);
-  box-shadow: 0 0 0 4px rgba(198, 40, 40, 0.15);
+.mx-input.has-error {
+  border-color: var(--mx-error);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
 }
 
-.zb-btn-primary {
-  width: 100%;
-  height: 52px;
-  background: var(--zb-lime);
-  color: var(--zb-black);
-  font-weight: 700;
+.mx-btn-primary {
+  height: 46px;
+  background: var(--mx-primary);
+  color: var(--mx-white);
+  font-weight: 600;
   font-size: 0.9375rem;
-  border-radius: var(--zb-radius-sm);
+  border-radius: var(--mx-radius-md);
   border: none;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: background 150ms ease, transform 150ms ease;
+  padding: 0 1.5rem;
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.28);
+  transition: all 150ms ease;
 }
 
-.zb-btn-primary:hover {
-  background: var(--zb-lime-hover);
+.mx-btn-primary:hover {
+  background: var(--mx-primary-hover);
+  box-shadow: 0 6px 16px rgba(29, 78, 216, 0.36);
+  transform: translateY(-1px);
 }
 
-.zb-btn-primary:active {
+.mx-btn-primary:active {
   transform: translateY(1px);
 }
 
-.zb-btn-outline {
-  width: 100%;
-  height: 48px;
-  background: transparent;
-  color: var(--zb-black);
+.mx-btn-outline {
+  height: 46px;
+  background: var(--mx-white);
+  color: var(--mx-text-dark);
   font-weight: 600;
   font-size: 0.875rem;
-  border-radius: var(--zb-radius-sm);
-  border: 1px solid var(--zb-line);
+  border-radius: var(--mx-radius-md);
+  border: 1px solid var(--mx-card-border);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -215,44 +197,7 @@ body {
   transition: background 150ms ease;
 }
 
-.zb-btn-outline:hover {
-  background: var(--zb-paper);
-}
-
-/* Animations */
-@keyframes zb-shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-4px); }
-  40%, 80% { transform: translateX(4px); }
-}
-
-.zb-shake {
-  animation: zb-shake 240ms ease-in-out;
-}
-
-@keyframes zb-pop-in {
-  0% { transform: scale(0.65); opacity: 0; }
-  60% { transform: scale(1.08); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.zb-pop-in {
-  animation: zb-pop-in 420ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes zb-scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(1000%); }
-}
-
-.zb-scan-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--zb-lime), transparent);
-  box-shadow: 0 0 12px var(--zb-lime);
-  animation: zb-scanline 1.2s linear infinite;
-  pointer-events: none;
-  z-index: 30;
+.mx-btn-outline:hover {
+  background: var(--mx-primary-soft);
+  border-color: #93c5fd;
 }

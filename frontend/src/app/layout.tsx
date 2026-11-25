@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Moatix Check – Sri Lanka Scam & Fraud Verification',
-  description: 'Public scam and fraud verification engine for Sri Lanka by ZegBit',
+  description: 'Public scam assessment portal for Sri Lanka by ZegBit',
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased bg-[#0B0B0B] text-white">
+      <body style={{ margin: 0, padding: 0, backgroundColor: '#9ec5fe', color: '#0f172a', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
         {children}
       </body>
     </html>
